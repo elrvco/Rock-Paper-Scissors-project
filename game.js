@@ -6,27 +6,21 @@ function getComputerChoice () { // this function give us a random choice
 
 function playRound (playerSelection,computerSelection) {  // this is the game
     if (playerSelection !== 'paper' && playerSelection !== 'rock' && playerSelection !=='scissors') {
-        window.alert('input no valid');
+        return undefined;
     } else {
         switch(true) {
             case playerSelection == 'rock' && computerSelection == 'scissors':
                 return 'You win! ' + playerSelection +' beats '+ computerSelection;
-                break;
             case playerSelection == 'paper' && computerSelection == 'rock':
                 return 'You win! ' + playerSelection +' beats '+ computerSelection;
-                break;
             case playerSelection == 'scissors' && computerSelection == 'paper':
                 return 'You win! ' + playerSelection +' beats '+ computerSelection;
-                break;
             case playerSelection == 'scissors' && computerSelection == 'rock':
                 return 'You lose! ' + computerSelection + ' beats ' + playerSelection;
-                break;
             case playerSelection == 'rock' && computerSelection == 'paper':
                 return 'You lose! ' + computerSelection + ' beats ' + playerSelection;
-                break;
             case playerSelection == 'paper' && computerSelection == 'scissors':
                 return 'You lose! ' + computerSelection + ' beats ' + playerSelection;
-                break;
             default:
                 return "it's a tie! " + playerSelection + ' VS ' + computerSelection;
         }
@@ -60,10 +54,15 @@ function winner(){ // this determines if the player is a winner or a loser
 }
 
 function playGame(){ // this allows us to play 5 rounds and record each round results
+    gameMemo=[];
     for(let i=0; i<5; i++){
             let computerSelection = getComputerChoice();
             let playerSelection = prompt('Select between paper, scissors and rock');
             gameMemo.push((playRound(playerSelection,computerSelection)));
+            if (gameMemo[i] == undefined){
+                window.alert('input no valid. click play again to restart the game');
+                break;
+            }
             console.log(gameMemo);
     }
     console.log(winner());
